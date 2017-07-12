@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Renderização adequada / zoom pelo toque -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Estilos -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+
+	<!-- Titulo da pagina -->
+	<title>8Moons Config</title>
+</head>
+
+<body class='configBackground'>
+    <div class="container">
+
+	<!-- POP-UP FOR LOGIN -->
+	<div id='loginScreen'>
+		<form class="form-signin" onsubmit='logIn()'>
+			<h2 class="form-signin-heading">Insira e-mail e senha:</h2>
+			<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" value='admin@8moon.com' required autofocus>
+			<input type="password" id="inputSenha" class="form-control" placeholder="Senha" value='admin.password' required>
+			<div class="checkbox"></div>
+			<button class="btn btn-lg btn-primary btn-block singInBtn" type="submit">Sign in</button>
+		</form>
+	</div>
+
+    </div>
+			
+	<div class='container-fluid' style="display: none" id='maintScreen'>
+		<h1 id='welcomeText'></h1>
+		<!-- Manutenção - Desktop -->
+		<form onsubmit='javascript:insertItem();'>
+			<div class="form-group">
+				<label for="formDept">Departamento</label>
+				<input type="text" class="form-control" id="formDept" placeholder="Departamento">
+			</div>
+			<div class="form-group">
+				<label for="formName">Nome</label>
+				<input type="text" class="form-control" id="formName" placeholder="Nome">
+			</div>
+			<div class="form-group">
+				<label for="formSize">Tamanho</label>
+				<input type="text" class="form-control" id="formSize" placeholder="Tamanho">
+			</div>
+			<div class="form-group">
+				<label for="formValue">Valor</label>
+				<input type="number" step='0.01' class="form-control" id="formValue" placeholder="Valor">
+			</div>
+			<div class="form-group">
+				<label for="formQtd">Quantidade</label>
+				<input type="number" class="form-control" id="formQtd" placeholder="Quantidade">
+			</div>
+			<div class="form-group">
+				<label for="formImg">Imagem</label>
+				<input type="file" class="form-control-file" id="formImg">
+			</div>
+
+			<input type="submit" class="btn btn-primary colorButtons"></input>		
+			<input type="reset" class="btn btn-primary colorButtons"></input>
+			
+			<input type="button" class="btn btn-primary colorButtons" style="float: right" value="Log Out" onclick="logOut()"></input>
+		</form>
+
+		<hr>
+
+		<!-- Produtos ja existentes -->
+		<div id='itensDiv'>		
+		</div>
+	</div>
+
+	<!-- JavaScript for Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+	<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+	<!-- Icons for Bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Script for Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+
+	<!-- My Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+
+</body>

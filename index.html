@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<!-- TEMPLATES -->
+<!-- https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
+<!-- https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm# -->
+
+<head>
+	<!-- Renderização adequada / zoom pelo toque -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Estilos -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
+
+	<!-- Titulo da pagina -->
+	<title>8Moons Bazaar</title>
+</head>
+
+<body class='bodyBackground'>
+
+	<div class="container-fluid fixed-top">
+		
+		<!-- VER CARRINHO - DESKTOP -->
+		<div class="navbar-toggler-right hidden-xs-down barButtons" id='showKart'>			
+			<button class="checkOutButton" type="button" onclick='toggleKart();'>
+				<b style='font-size:15px'>Ver Carrinho</b>
+				<span class="glyphicon glyphicon-shopping-cart "></span>
+			</button>
+		</div>
+	
+		<!-- BARRA DE MENU - DESKTOP -->
+		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">		
+			<!-- LOGO -->
+			<a target="_blank" id='logoImga'>
+				<img class='img-fluid rounded-circle' id='logoImg'>
+			</a>
+			<div>
+				<br>
+			</div>
+			<!-- Espaco -->
+
+			<!-- Opcoes do menu -->
+			<ul class="nav nav-pills flex-column ">
+				<li class="nav-item ">
+					<a class="nav-link" href="#BLUSAS">Blusas</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="#SAIAS">Saias</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="#VESTIDOS">Vestidos</a>
+				</li>
+				<br>
+				<li class="nav-item myItem atBottom">
+					<a class="nav-link" href="#footerInfo">
+						<span class="glyphicon glyphicon-info-sign"></span>
+						Informações
+					</a>
+				</li>
+				<li class="nav-item myItem">
+					<a class="nav-link" target="" href="config/index.html">
+						<span class="glyphicon glyphicon-wrench"></span>
+						Manutenção
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- BARRA DE MENU - MOBILE -->
+		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor miniMenu">
+			<div class="navbar-toggler-right barButtons">
+				<!-- VER CARRINHO - MOBILE -->
+				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" onclick='toggleKart();'>
+					<span class="glyphicon glyphicon-shopping-cart"></span>
+				</button>	
+				<!-- ABRIR/FECHAR MENU - MOBILE -->
+				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="glyphicon glyphicon-menu-hamburger"></span>
+				</button>
+			</div>	
+			
+			<a class="navbar-brand miniMenuTitle" href="images/logo.png">
+				8Moons Bazaar
+			</a>	
+			
+			<div class="collapse navbar-collapse miniMenuOptions" id="navbarsExampleDefault">
+				<!-- Opcoes do menu -->
+				<ul class="navbar-nav mr-auto miniMenuUl">
+					<li class="nav-item active miniMenuLi">
+						<a class="nav-link miniMenuOption" href="#blusas">Blusas</a>
+					</li>
+					<li class="nav-item active miniMenuLi">
+						<a class="nav-link miniMenuOption" href="#saias">Saias</a>
+					</li>
+					<li class="nav-item active miniMenuLi">
+						<a class="nav-link miniMenuOption" style='' href="#vestidos">Vestidos</a>
+					</li>
+					<br>
+					<br>
+					<li class="nav-item active miniMenuLi myItem">
+						<a class="nav-link miniMenuOption" href="#footerInfo">
+							<span class="glyphicon glyphicon-info-sign"></span>
+							Informações
+						</a>
+					</li>
+					<li class="nav-item active miniMenuLi myItem">
+						<a class="nav-link miniMenuOption" target="_blank" href="index_config.html">
+							<span class="glyphicon glyphicon-wrench"></span>
+							Manutenção
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="row">
+
+			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myMain" id='tudo'>
+				<!-- Espaco antes do grid -->
+				<div class='spaceForMenu hidden-sm-up'>
+				</div>
+				
+				<!-- GRID DE PRODUTOS -->
+				<div id='pageGrid'>
+				</div>
+				
+				<!-- RODAPE -->
+				<footer class=' myFooter sidebarColor' id='footerInfo'>
+					<div class='contactTitleDiv'>
+						<h5>
+							<span class="glyphicon glyphicon-info-sign"></span>
+							<b class='contactTitle'>Informações para contato:</b>
+						</h5>
+					</div>
+					<div class='hrDivClass'>
+						<hr>
+					</div>					
+					<ul class='nav nav-pills flex-column contactOptions'>
+						<li class='nav-item' style='margin-top:2%'>
+							<p>
+								<span class="glyphicon glyphicon-user"></span> 
+								E-mail: 
+								<a href="mailto:someone@example.com" class='mailLink'>contato.8moons@hotmail.com</a>
+							</p>
+						</li>
+						<li class='nav-item'>
+							<p>
+								<span class="glyphicon glyphicon-earphone"></span> 
+								Telefone: ( XX ) XXXX-XXXX
+							</p>
+						</li>
+						<li class='nav-item'>
+							<p>
+								<span class="glyphicon glyphicon-thumbs-up"></span> 
+								Curta nossa página no
+								<a target="_blank" href="https://fb.me/8moonsbazaar" class=''>Facebook</a>
+							</p>
+						</li>
+						<li class='nav-item'>
+							<p>
+								<span class="glyphicon glyphicon-heart-empty"></span> 
+								Siga-nos no Instagram: @8moonsbazaar
+							</p>
+						</li>
+					</ul>
+				</footer>
+
+			</main>
+		</div>
+	</div>
+	
+	<!-- Visualizacao do carrinho - Desktop -->
+	<div class='container offset-sm-3' id='kartScreen'> 
+		<button class="closeButton" type="button" onclick='toggleKart();'>
+			<!-- <b style='font-size:15px'>Check-Out</b> -->
+			<span class="glyphicon glyphicon-remove "></span>
+		</button>
+		<table class='table'>
+			<thead class='text-center'>
+			  <tr>
+				<th>Produto</th>
+				<th>Tamanho</th>
+				<th>Valor</th>
+				<th>Quantidade</th>
+				<th>Remove</th>
+			  </tr>
+			</thead>
+			<tbody id='kartResult'>
+			</tbody>
+		</table>
+		<br>
+		<div class='atBottom'>
+			<button class="popupButtons" type="button" onclick='toggleKart();'>
+				<b style='font-size:15px'>Check-Out</b>
+				<span class="glyphicon glyphicon-check "></span>
+			</button>
+			<button class="popupButtons" type="button" onclick='clearKart();'>
+				<b style='font-size:15px'>Limpar Carrinho</b>
+				<span class="glyphicon glyphicon-trash "></span>
+			</button>
+		</div>
+	</div>
+	
+	<!-- JavaScript for Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+	<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+	<!-- Script for icons - Bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Script for Firebase -->
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+
+	<!-- My Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
