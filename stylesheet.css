@@ -421,7 +421,19 @@ h1 {
 	height: auto;
 	min-height: 170px;
 	top: 15px;
-	z-index: 99999999999999999;
+	z-index: 9999;
+}
+#mailScreen {
+	background-color: black;
+	color: white;
+	margin: auto;
+	width: 80%;
+	min-width: 15%;
+	height: auto;
+	min-height: 170px;
+	top: 15px;
+	padding: 0 2% 15px 2%;
+	z-index: 9999;
 }
 #loginScreen{
 	background-color: black;
@@ -454,8 +466,9 @@ h1 {
 	border: none;
 	border-radius: 10px;
 	font-size: 15px;
-	margin: 2% 0 0 0;
+	margin: 2% 0 2% 0;
     float: right;
+	/* padding: 1px 6px 1px 6px; */
 }
 .popupButtons{
 	color: white;
@@ -502,7 +515,10 @@ h1 {
 	border-color: lightgray;
 }
 
-
+.sendButton{
+	float: right; 
+	margin: 1% 1% 1px 1%;
+}
 
 
 

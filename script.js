@@ -137,12 +137,17 @@ $(document).ready(function() {
 			return filteredProds;
 		};
 	}; // end-clGrid
-    // Carrinho
+    
+	// Carrinho
     var clKart = class {
         // Exibe/Esconde tela do carrinho - toggleKart
         static toggle() {
-            $('#kartScreen').toggle();
-            clKart.load();
+			// if(Object.entries(myKart).length > 0){
+				$('#kartScreen').toggle();
+				clKart.load();			
+			// } else {
+				// alert("Carrinho vazio");
+			// };
         };
 		//Adiciona ao carrinho - addToKart
         static addItem(itemId, addQtd) {
@@ -221,7 +226,77 @@ $(document).ready(function() {
             // $("#kartResult tr").remove(); 
             clKart.load();
         };
+        // Check Out
+        static checkOut() {
+			if(Object.entries(myKart).length > 0){
+				clKart.toggle();
+				clMail.load();
+				clMail.toggle();				
+			} else {
+				alert("Carrinho vazio");
+			};
+        };		
     }; // end-clKart
+	
+	// Check Out
+	var clMail = class {	
+        // Exibe/Esconde tela do Check Out
+		static toggle(){
+            $('#mailScreen').toggle();
+		};
+		// Carrega formulario do email
+		static load(){
+			var totValue = 0.00;			
+			var mail = "";
+			
+            for (var id in myKart) { 
+				if (myKart[id].qtd > 0) {
+					totValue += (myKart[id].qtd * myKart[id].value);
+					mail += clMail.concatItem(myKart[id]);
+				} 
+			};
+			mail += "\n" + "\n" + "Total(R$): " + totValue;
+			
+			$("#mailBody").text(mail);
+		};
+		// Monta texto de email do item
+		static concatItem(item){
+			return "\n" + "Produto:" 
+				+ "\n" + "\t" + "Nome: " +  item.name 
+				+ "\n" + "\t" + "Tamanho: " + item.size
+				+ "\n" + "\t" + "Qtd: " + item.qtd
+				+ "\n" + "\t" + "Valor(un): " + item.value;			
+		};
+		// Limpa formulario de email
+		static clear(){
+			$(".mailInput").text('');	 		
+		};
+		// Envia o email
+		static send(){						
+			var userProds = $("#mailBody").text();	
+			var userObs = "Observações do pedido:" + "\n" + "\t" + $("#mailObs").val();	
+			var userInfo = "Meu contato: " 
+						+ "\n" + "\t" + "Nome: " + $("#mailName").val()
+						+ "\n" + "\t" + "E-mail: " + $("#mailAddres").val()
+						+ "\n" + "\t" + "Telefone: " + $("#phoneUser").val();	
+						
+			var mailAdds = $("#mailAddres").val() + ", " + "contato.8moons@hotmail.com";
+			var mailSubj = "[PEDIDO] " + $("#mailName").val() + " | " + new Date().toISOString() ;						
+			var mailBody = "Carrinho:" + userProds
+						+ "\n" + "\n" + userObs
+						+ "\n" + "\n" + userInfo;
+			
+			Email.send( "contato.8moons@hotmail.com",
+						"contato.8moons@hotmail.com",
+						mailSubj,
+						mailBody,
+						"smtp.live.com",
+						"contato.8moons@hotmail.com",
+						"lu044118");
+			clMail.clear();
+			clMail.toggle();
+		};
+	};
 	
 	// Login
     var clLogin = class {
@@ -249,66 +324,21 @@ $(document).ready(function() {
 			clLogin.toggle();
         };
     }; // end-clLogin
-    // Firebase (tutorial https://www.tutorialspoint.com/firebase)
-    var clFirebase = class {
-        // Inicializa - init
-        static init() {
-			// Initialize Firebase
-			var config = {
-				apiKey: "AIzaSyCYsRQQ2xTOkE7XIJSQxQYM_WaKsa-gtvY",
-				authDomain: "moons-bazzar.firebaseapp.com",
-				databaseURL: "https://moons-bazzar.firebaseio.com",
-				projectId: "moons-bazzar",
-				storageBucket: "moons-bazzar.appspot.com",
-				messagingSenderId: "244394754480"
-			};
-			firebase.initializeApp(config);
-				};
-        // Submit do formulario - submitForm
-        static submit(action) {
-            switch (action) {
-                case 'INS':
-					clFirebase.insert();
-                    break;
-                case 'DEL':
-					clFirebase.insert();
-                    break;
-                case 'UPD':
-					clFirebase.update();
-                    break;
-            };
-        };
-        // Adiciona produto - insProduct
-        static insert(newProd) {
-            var refProd = firebase.database().ref("products");
-            refProd.push(newProd);
-        };
-        // Atualiza produto - updProduct
-        static update(itemId, itemField, newValue) {
-            var refPath = "products/" + itemId;
-            var itemRef = firebase.database().ref(refPath);
-            var updItem = Object.assign({}, myGrid[itemId]);
 
-            updItem[itemField] = newValue;
-            itemRef.update(updItem);
-        };
-        // Salva imagem no storage
-        static saveImg(imgPath) {
-			var storage = firebase.storage();
-			var storageRef = storage.ref();
-			storageRef.bucket.upload(imgPath, function(err, file){
-				if (err){
-					alert('Imagens foi salva!');
-				};
-			});
-        };		
-    }; // end-clFirebase
-
+	sendMail = function(){
+		clMail.send();
+	};
+	checkOut = function(){
+		clKart.checkOut();
+	};
     clearKart = function() {
         clKart.clear();
     };
     toggleKart = function() {
         clKart.toggle();
+    };
+    toggleMail = function() {
+        clMail.toggle();
     };
 	getById = function(itemId, obj){		
 		for (var i in obj) {
@@ -317,39 +347,37 @@ $(document).ready(function() {
 			};
 		};			
 	};
-	setImgMapping = function(mappingArray){
-		for (var i = 0; i < mappingArray.length; i++){
-			setImg2Screen(mappingArray[i].img, mappingArray[i].id);			
-		};		
-	};
 	setImgForMapp = function(imgPath, id){
 		var imgID = '#' + id;
 		var map = {img: imgPath , id: imgID };
 		imgsMapp.push(map);
 	};
+	setImgMapping = function(mappingArray){
+		for (var i = 0; i < mappingArray.length; i++){ setImg2Screen(mappingArray[i].img, mappingArray[i].id) };		
+	};
 	setImg2Screen = function(imgPath, imgID) {
 		var storage = firebase.storage();
 		var storageRef = storage.ref();
-		// storageRef.child(imgPath).getDownloadURL().then(function(url) {		
-		
 		var imagesRef = storageRef.child('images');	
-		imagesRef.child(imgPath).getDownloadURL().then(function(url) {		
-		
+		imagesRef.child(imgPath).getDownloadURL().then(function(url) {				
 			var linkID = imgID + 'a';
 			$(imgID).attr("src", url);
 			$(linkID).attr("href", url);
 		});
 	};
-	tryLogin = function(){
-		var email = $('#inputEmail').val();
-		var password = $('#inputSenha').val();		
-		clLogin.logIn(email, password);	
-	};	
-
+	
     ////// Inicializando ///////////////////////////////////////////////////////////////////////////////////////////////////////	
-	clFirebase.init();	
+	var config = {
+		apiKey: "AIzaSyCYsRQQ2xTOkE7XIJSQxQYM_WaKsa-gtvY",
+		authDomain: "moons-bazzar.firebaseapp.com",
+		databaseURL: "https://moons-bazzar.firebaseio.com",
+		projectId: "moons-bazzar",
+		storageBucket: "moons-bazzar.appspot.com",
+		messagingSenderId: "244394754480"
+	};	
+	// Initialize Firebase
+	firebase.initializeApp(config);
 	clGrid.load();
-    clKart.toggle();
 	setImgForMapp("logo-compact.png", "logoImg");
 	
 }); // end-$(document).ready
