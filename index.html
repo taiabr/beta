@@ -34,7 +34,7 @@
 		</div>
 	
 		<!-- BARRA DE MENU - DESKTOP -->
-		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">		
+		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">	
 			<!-- LOGO -->
 			<a target="_blank" id='logoImga'>
 				<img class='img-fluid rounded-circle' id='logoImg'>
@@ -109,7 +109,7 @@
 						</a>
 					</li>
 					<li class="nav-item active miniMenuLi myItem">
-						<a class="nav-link miniMenuOption" target="_blank" href="index_config.html">
+						<a class="nav-link miniMenuOption" target="_blank" href="config/index.html">
 							<span class="glyphicon glyphicon-wrench"></span>
 							Manutenção
 						</a>
@@ -185,7 +185,8 @@
 				<th>Produto</th>
 				<th>Tamanho</th>
 				<th>Valor</th>
-				<th>Quantidade</th>
+				<th class="hidden-xs-down">Quantidade</th>
+				<th class="hidden-sm-up">Qtd</th>
 				<th>Remove</th>
 			  </tr>
 			</thead>
@@ -194,18 +195,18 @@
 		</table>
 		<br>
 		<div class='atBottom'>
-			<button class="popupButtons" type="button" onclick='checkOut();'>
+			<button class="popupButtons" type="submit" onclick='checkOut();'>
 				<span class="glyphicon glyphicon-check "></span>
 				<b style='font-size:15px'>Check-Out</b>
 			</button>
-			<button class="popupButtons" type="button" onclick='clearKart();'>
+			<button class="popupButtons" type="submit" onclick='clearKart();'>
 				<span class="glyphicon glyphicon-trash "></span>
 				<b style='font-size:15px'>Limpar Carrinho</b>
 			</button>
 		</div>
 	</div>
 	
-	<!-- Check Out - Desktop -->
+	<!-- Check Out -->
 	<div class='container offset-sm-3' style="display: none" id='mailScreen'> 
 		<button class="closeButton" type="button" onclick='toggleMail();'>
 			<span class="glyphicon glyphicon-remove "></span>
