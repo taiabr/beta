@@ -277,7 +277,7 @@ var clMail = class{
 	};
 	// Envia o email
 	static send(){			
-		// Recupera / Valida informações do usuário
+		// Recupera e valida as informações do usuário
 		var mailName = $("#mailName").val();
 		var mailAddres = $("#mailAddres").val();
 		var mailPhone = $("#mailPhone").val();			
@@ -292,7 +292,8 @@ var clMail = class{
 						+ "\n" + "\t" + "Telefone: " + mailPhone;	
 					
 		// Monta email
-		var mailAdds = mailAddres + ", " + "contato.8moons@hotmail.com";
+		var mailFrom = "contato.8moons@hotmail.com";
+		var mailTo = "contato.8moons@hotmail.com" + ", " + mailAddres;
 		var mailSubj = "[PEDIDO] " + mailName + " | " + new Date().toISOString() ;						
 		var mailBody = "Carrinho:" 
 					+ "\n" + userProds
@@ -302,9 +303,9 @@ var clMail = class{
 					+ "\n" + "\t" + userInfo;
 		
 		// Envia email
-		if( confirm("Enviar pedido(email)?") ){
-			Email.send( "contato.8moons@hotmail.com",
-						"contato.8moons@hotmail.com",
+		if( confirm("Enviar pedido?") ){
+			Email.send( mailFrom,
+						mailTo,
 						mailSubj,
 						mailBody,
 						"smtp.live.com",

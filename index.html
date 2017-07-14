@@ -120,6 +120,7 @@
 			</div>
 		</nav>
 
+		<!-- TELA  -->
 		<div class="row">
 
 			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myMain" id='tudo'>
@@ -159,8 +160,8 @@
 						<li class='nav-item'>
 							<p>
 								<span class="glyphicon glyphicon-thumbs-up"></span> 
-								Curta nossa página no
-								<a target="_blank" href="https://fb.me/8moonsbazaar" class=''>Facebook</a>
+								Curta nossa página no Facebook: 
+								<a target="_blank" href="https://fb.me/8moonsbazaar" class=''>fb.me/8moonsbazaar</a>
 							</p>
 						</li>
 						<li class='nav-item'>
@@ -178,9 +179,12 @@
 	
 	<!-- Visualizacao do carrinho -->
 	<div class='container offset-sm-3 popup' style="display: none" id='kartScreen'> 
-		<button class="closeButton" type="button" onclick='toggleKart();'>
-			<span class="glyphicon glyphicon-remove "></span>
-		</button>
+		<div class="mailTitle">
+			<h4 class="d-inline underlineClass">Carrinho de Compras</h4>
+			<button class="closeButton" type="button" onclick='toggleKart();'>
+				<span class="glyphicon glyphicon-remove "></span>
+			</button>
+		</div>
 		<table class='table'>
 			<thead class='text-center'>
 			  <tr>
@@ -210,21 +214,37 @@
 	
 	<!-- Check Out -->
 	<div class='container offset-sm-3 popup' style="display: none" id='mailScreen'> 
-		<button class="closeButton" type="button" onclick='toggleMail();'>
-			<span class="glyphicon glyphicon-remove "></span>
-		</button>
+		<div class="mailTitle">
+			<h4 class="d-inline underlineClass">Check Out</h4>
+			<button class="closeButton d-inline" type="button" onclick='toggleMail();'>
+				<span class="glyphicon glyphicon-remove "></span>
+			</button>
+		</div>
 		
 		<form class="form-group" onsubmit="sendMail()">
-			<input type="text" class="form-control mailInput" id="mailName" placeholder="Nome" required>
-			<input type="email" class="form-control mailInput" id="mailAddres" placeholder="E-mail" required>
-			<input type="number" class="form-control mailInput" id="mailPhone" placeholder="Telefone" pattern="[0-9]" required>
+			<div class="input-group">
+				<input type="text" class="form-control mailInput" id="mailName" placeholder="Nome" required>
+				<div class="input-group-addon redClass">*</div>
+			</div>
+			<div class="input-group">
+				<input type="email" class="form-control mailInput" id="mailAddres" placeholder="E-mail" required></input>
+				<div class="input-group-addon redClass">*</div>
+			</div>
+			<div class="input-group">
+				<input type="number" class="form-control mailInput" id="mailPhone" placeholder="Telefone" pattern="[0-9]" required>
+				<div class="input-group-addon redClass">*</div>
+			</div>
+			<p class="obsClass redClass rightClass">* Campos obrigatórios</p>
+			<br>
 			<textarea class="form-control mailInput" rows="1" cols="80" id="mailObs" placeholder="Observações..."></textarea>
+			<br>
+			<textarea class="form-control mailInput" rows="7" cols="80" id="mailBody" readonly>
+			</textarea>	
 		
 			<input type="submit" class="btn btn-primary colorButtons sendButton"></input>	
 		</form>
+		<p class="obsClass leftClass bottomClass">obs: Você receberá um e-mail com a cópia do pedido</p>
 		
-		<textarea class="form-control mailInput" rows="7" cols="80" id="mailBody" readonly>
-		</textarea>	
 	</div>
 	
 	<!-- JavaScript for Bootstrap -->

@@ -356,7 +356,6 @@ h1 {
 	margin-left: 5%;	
 }
 .contactTitleDiv{
-	/* margin-bottom:2%; */
 	margin: 3px 0 3px 0 !important;
 }
 .hrDivClass{
@@ -422,6 +421,7 @@ h1 {
 	min-height: 170px;
 	top: 15px;
 	z-index: 9999;
+	padding: 2% 2% 2% 2%;
 }
 #mailScreen {
 	background-color: black;
@@ -432,8 +432,8 @@ h1 {
 	height: auto;
 	min-height: 170px;
 	top: 15px;
-	padding: 0 2% 15px 2%;
 	z-index: 9999;
+	padding: 2% 2% 2% 2%;
 }
 #loginScreen{
 	background-color: black;
@@ -466,9 +466,8 @@ h1 {
 	border: none;
 	border-radius: 10px;
 	font-size: 15px;
-	margin: 2% 0 2% 0;
     float: right;
-	/* padding: 1px 6px 1px 6px; */
+	vertical-align: -webkit-baseline-middle;
 }
 .popupButtons{
 	color: white;
@@ -517,7 +516,7 @@ h1 {
 
 .sendButton{
 	float: right; 
-	margin: 1% 1% 1px 1%;
+	margin: 1% 1% 1% 1%;
 }
 
 .popup{
@@ -529,8 +528,37 @@ h1 {
 	pointer-events: none;
 	opacity: 0.5;
 }
+.underlineClass{
+	text-decoration: underline;
+}	
 
+.mailTitle{
+	text-align: center;
+	vertical-align: -webkit-baseline-middle;
+	margin: 0 0 2% 0;
+}
 
+.obsClass{
+	font-size: 12px;
+	margin: auto;
+}
 
+.rightClass{
+	float: right;
+}
 
+.leftClass{
+	float: left;	
+}
 
+.centerClass{
+	text-align: center;	
+}
+
+.bottomClass{
+	vertical-align: bottom;
+}
+
+.redClass{
+	color: red;
+}
