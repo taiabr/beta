@@ -22,12 +22,12 @@
 
 	<!-- POP-UP FOR LOGIN -->
 	<div id='loginScreen'>
-		<form class="form-signin" onsubmit='logIn()'>
+		<form class="form-signin">
 			<h2 class="form-signin-heading">Insira e-mail e senha:</h2>
 			<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" value='admin@8moon.com' required autofocus>
 			<input type="password" id="inputSenha" class="form-control" placeholder="Senha" value='admin.password' required>
 			<div class="checkbox"></div>
-			<button class="btn btn-lg btn-primary btn-block singInBtn" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block singInBtn" type="submit" onclick='logIn()'>Log In</button>
 		</form>
 	</div>
 

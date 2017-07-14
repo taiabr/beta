@@ -520,10 +520,15 @@ h1 {
 	margin: 1% 1% 1px 1%;
 }
 
+.popup{
+	border: 3px solid #a9a9a9;
+}
 
-
-
-
+.disableClass
+{
+	pointer-events: none;
+	opacity: 0.5;
+}
 
 
 

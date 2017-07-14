@@ -1,5 +1,5 @@
 /*eslint-env jquery */
-// ALT + SHIFT + 0  e  ALT + 3
+// ALT + SHIFT + 0  e  ALT+2
 	
 // $(document).onload(function() {
 $(document).ready(function() {
@@ -14,16 +14,18 @@ $(document).ready(function() {
 		firebase.auth().signInWithEmailAndPassword(email, password).catch( function(error){
 			var errorCode = error.code;
 			var errorMessage = error.message;
-			alert(errorMessage);
+			// alert(errorMessage);
 			console.log(error);
 		});
 	
 		// Mapeia acao para mudanca de status (logIn / logOut)
 		firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
-			  loadMaintScreen();
+			loadMaintScreen();
+			console.log("LogIn");
+			toggleScreen("i");
 		  } else {
-			console.log("User NULL");
+			console.log("LogOut");
 			toggleScreen("o");
 		  }
 		});	
