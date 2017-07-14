@@ -1,3 +1,4 @@
+<!-- ALT + SHIFT + 0  e  ALT+3 -->
 <!DOCTYPE html>
 <html>
 
@@ -22,8 +23,9 @@
 </head>
 
 <body class='bodyBackground'>
-
-	<div class="container-fluid fixed-top">
+	
+	<!-- Tela principal -->
+	<div class="container-fluid fixed-top mainScreen">
 		
 		<!-- VER CARRINHO - DESKTOP -->
 		<div class="navbar-toggler-right hidden-xs-down barButtons" id='showKart'>			
@@ -175,7 +177,7 @@
 	</div>
 	
 	<!-- Visualizacao do carrinho -->
-	<div class='container offset-sm-3' style="display: none" id='kartScreen'> 
+	<div class='container offset-sm-3 popup' style="display: none" id='kartScreen'> 
 		<button class="closeButton" type="button" onclick='toggleKart();'>
 			<span class="glyphicon glyphicon-remove "></span>
 		</button>
@@ -207,24 +209,22 @@
 	</div>
 	
 	<!-- Check Out -->
-	<div class='container offset-sm-3' style="display: none" id='mailScreen'> 
+	<div class='container offset-sm-3 popup' style="display: none" id='mailScreen'> 
 		<button class="closeButton" type="button" onclick='toggleMail();'>
 			<span class="glyphicon glyphicon-remove "></span>
 		</button>
 		
-		<form class="form-group" onsubmit="">
-			<form class="form-inline">
-				<input type="text" class="form-control mailInput" id="mailName" placeholder="Nome">
-				<input type="text" class="form-control mailInput" id="mailAddres" placeholder="E-mail">
-				<input type="tel" class="form-control mailInput" id="phoneUser" placeholder="Telefone" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{5}[\-]\d{4}">
-				<textarea class="form-control mailInput" rows="1" cols="80" id="mailObs" placeholder="Observações..."></textarea>
-			</form>
-			
-			<textarea class="form-control mailInput" rows="7" cols="80" id="mailBody" readonly>
-			</textarea>
-			
-			<input type="submit" class="btn btn-primary colorButtons sendButton" onclick="sendMail()"></input>		
+		<form class="form-group" onsubmit="sendMail()">
+			<input type="text" class="form-control mailInput" id="mailName" placeholder="Nome" required>
+			<input type="email" class="form-control mailInput" id="mailAddres" placeholder="E-mail" required>
+			<input type="number" class="form-control mailInput" id="mailPhone" placeholder="Telefone" pattern="[0-9]" required>
+			<textarea class="form-control mailInput" rows="1" cols="80" id="mailObs" placeholder="Observações..."></textarea>
+		
+			<input type="submit" class="btn btn-primary colorButtons sendButton"></input>	
 		</form>
+		
+		<textarea class="form-control mailInput" rows="7" cols="80" id="mailBody" readonly>
+		</textarea>	
 	</div>
 	
 	<!-- JavaScript for Bootstrap -->
