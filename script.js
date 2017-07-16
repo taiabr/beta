@@ -68,14 +68,14 @@ var clGrid = class{
 					
 					if(thisProd != undefined){
 						// Monta ID para o botao
-						var btnId = '#add-' + thisProd.id;
+						var btnId = '#add-' + id;
 						// Monta ID para a imagem
-						var imgId = 'img-' + thisProd.id;
+						var imgId = 'img-' + id;
 						var linkID = imgId + 'a';
 
 						// Monta codigo do grid
 						var newProd 
-								= "<div class='col-6 col-sm-3 placeholder myProduct' id='" + thisProd.id + "'>" 
+								= "<div class='col-6 col-sm-3 placeholder myProduct' id='" + id + "'>" 
 								// + "<a target='_blank' href='" + thisProd.img + "'>"
 								+ "<a target='_blank' id='" + linkID + "'>"
 								+ "<img id='" + imgId +  "' width='200' height='200' class='img-fluid' alt='" + thisProd.name + "'>" 
