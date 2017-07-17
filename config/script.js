@@ -260,5 +260,5 @@ var config = {
 // $(document).onload(function() {
 $(document).ready(function() {
 	firebase.initializeApp(config);
-	loadMaintScreen();
+	//loadMaintScreen();
 }); // end-$(document).ready
