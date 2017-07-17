@@ -31,8 +31,8 @@ logIn = function() {
 
 // Carrega a tela de manutenção
 loadMaintScreen = function() {
-	// $("#welcomeText").text( "Bem vindo " + firebase.auth().currentUser.displayName + " !");
-	$("#welcomeText").text("Bem vindo " + "Admin" + " !");
+	$("#welcomeText").text( "Bem vindo " + firebase.auth().currentUser.displayName + " !");
+	// $("#welcomeText").text("Bem vindo " + "Admin" + " !");
 	toggleScreen("i");
 	loadItens();
 };
@@ -260,5 +260,5 @@ var config = {
 // $(document).onload(function() {
 $(document).ready(function() {
 	firebase.initializeApp(config);
-	//loadMaintScreen();
+	// loadMaintScreen();
 }); // end-$(document).ready
