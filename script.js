@@ -40,6 +40,17 @@ var clGrid = class{
 		};		
 		return myDeparts;
 	};		
+	// Monta o menu com os departamentos existentes
+	static setMenuOptions(departs){
+		var code = "";
+		for(var i = 0; i < departs.length; i++){
+			code += "<li class='nav-item'>"
+				+ "<a class='nav-link' href='#" + departs[i].toUpperCase()+ "'>" + departs[i] + "</a>"
+				+ "</li>" + "\n";
+		};
+		$("#menuOptions").append(code);
+		$("#menuOptionsMobile").append(code);
+	};
 	// Insere HTML dos produtos no grid - appendGridItens
 	static appendItens(myProds) {
 
@@ -50,6 +61,7 @@ var clGrid = class{
 		$('#pageGrid section').remove();
 		
 		myDeparts = clGrid.getDeparts(myProds);		
+		clGrid.setMenuOptions(myDeparts);
 		
 		//Cada departamento
 		myDeparts.forEach(function(depart) {
@@ -68,7 +80,7 @@ var clGrid = class{
 					
 					if(thisProd != undefined){
 						// Monta ID para o botao
-						var btnId = '#add-' + id;
+						var btnId = 'add' + id;
 						// Monta ID para a imagem
 						var imgId = 'img-' + id;
 						var linkID = imgId + 'a';
@@ -165,7 +177,7 @@ var clKart = class{
 			newItem.qtd = addQtd;
 
 			// Adiciona ao carrinho
-			myKart[ Object.entries(myKart).length ] = newItem;
+			myKart[ itemId ] = newItem;
 
 		// Atualiza a qtd de itens no carrinho
 		} else {
@@ -182,16 +194,17 @@ var clKart = class{
 		$("#kartResult tr").remove();
 		
 		// Carrega a tabela HTML com o carrinho atualizado
-		for (var id in myKart) { if (myKart[id].qtd > 0) { clKart.appendItem( myKart[id]); } };
+		for (var id in myKart) { if (myKart[id].qtd > 0) { clKart.appendItem(id) } };
 	};
 	// Insere HTML de item do carrinho - appendKartItem
-	static appendItem(kartItem) {
+	static appendItem(itemId) {
+		var kartItem = getById(itemId, myKart);
 		// Monta ID para o botao
-		var btnId = 'remove-' + kartItem.id;
+		var btnId = 'remove' + itemId;
 
 		// Adiciona linha à tabela do carrinho
 		var code 
-				= "<tr " + "id='" + kartItem.id + "'>" 
+				= "<tr " + "id='" + itemId + "'>" 
 				+ "<td>" + kartItem.name + "</td>" 
 				+ "<td>" + kartItem.size + "</td>" 
 				+ "<td>" + 'R$ ' + kartItem.value + "</td>" 
@@ -354,9 +367,9 @@ disableMain = function(){
 	};
 };
 getById = function(itemId, obj){		
-	for (var i in obj) {
-		if(obj[i].id === itemId){
-			return obj[i];
+	for (var id in obj) {
+		if(id === itemId){
+			return obj[id];
 		};
 	};			
 };

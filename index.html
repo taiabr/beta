@@ -1,4 +1,3 @@
-
 <!-- ALT + SHIFT + 0  e  ALT+3 -->
 <!DOCTYPE html>
 <html>
@@ -28,7 +27,7 @@
 	<!-- Tela principal -->
 	<div class="container-fluid fixed-top mainScreen">
 		
-		<!-- VER CARRINHO - DESKTOP -->
+		<!-- BOTAO PARA VER CARRINHO - DESKTOP -->
 		<div class="navbar-toggler-right hidden-xs-down barButtons" id='showKart'>			
 			<button class="checkOutButton" type="button" onclick='toggleKart();'>
 				<b style='font-size:15px'>Ver Carrinho</b>
@@ -49,15 +48,9 @@
 
 			<!-- Opcoes do menu -->
 			<ul class="nav nav-pills flex-column ">
-				<li class="nav-item ">
-					<a class="nav-link" href="#BLUSAS">Blusas</a>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link" href="#SAIAS">Saias</a>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link" href="#VESTIDOS">Vestidos</a>
-				</li>
+				<div id="menuOptions">
+					<!-- Departamentos -->
+				</div>
 				<br>
 				<li class="nav-item myItem atBottom">
 					<a class="nav-link" href="#footerInfo">
@@ -75,9 +68,9 @@
 		</nav>
 
 		<!-- BARRA DE MENU - MOBILE -->
-		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor miniMenu">
+		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor">
 			<div class="navbar-toggler-right barButtons">
-				<!-- VER CARRINHO - MOBILE -->
+				<!-- BOTAO PARA VER CARRINHO - MOBILE -->
 				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" onclick='toggleKart();'>
 					<span class="glyphicon glyphicon-shopping-cart"></span>
 				</button>	
@@ -94,25 +87,19 @@
 			<div class="collapse navbar-collapse miniMenuOptions" id="navbarsExampleDefault">
 				<!-- Opcoes do menu -->
 				<ul class="navbar-nav mr-auto miniMenuUl">
-					<li class="nav-item active miniMenuLi">
-						<a class="nav-link miniMenuOption" href="#blusas">Blusas</a>
-					</li>
-					<li class="nav-item active miniMenuLi">
-						<a class="nav-link miniMenuOption" href="#saias">Saias</a>
-					</li>
-					<li class="nav-item active miniMenuLi">
-						<a class="nav-link miniMenuOption" style='' href="#vestidos">Vestidos</a>
-					</li>
+					<div id="menuOptionsMobile">
+						<!-- Departamentos -->
+					</div>
 					<br>
 					<br>
-					<li class="nav-item active miniMenuLi myItem">
-						<a class="nav-link miniMenuOption" href="#footerInfo">
+					<li class="nav-item myItem">
+						<a class="nav-link" href="#footerInfo">
 							<span class="glyphicon glyphicon-info-sign"></span>
 							Informações
 						</a>
 					</li>
-					<li class="nav-item active miniMenuLi myItem">
-						<a class="nav-link miniMenuOption" target="_blank" href="config/index.html">
+					<li class="nav-item myItem">
+						<a class="nav-link" target="_blank" href="config/index.html">
 							<span class="glyphicon glyphicon-wrench"></span>
 							Manutenção
 						</a>
@@ -145,27 +132,27 @@
 						<hr>
 					</div>					
 					<ul class='nav nav-pills flex-column contactOptions'>
-						<li class='nav-item' style='margin-top:2%'>
+						<li class='nav-item ' style='margin-top:2%'>
 							<p>
 								<span class="glyphicon glyphicon-user"></span> 
 								E-mail: 
 								<a href="mailto:someone@example.com" class='mailLink'>contato.8moons@hotmail.com</a>
 							</p>
 						</li>
-						<li class='nav-item'>
+						<li class='nav-item '>
 							<p>
 								<span class="glyphicon glyphicon-earphone"></span> 
 								Telefone: ( XX ) XXXX-XXXX
 							</p>
 						</li>
-						<li class='nav-item'>
+						<li class='nav-item '>
 							<p>
 								<span class="glyphicon glyphicon-thumbs-up"></span> 
 								Curta nossa página no Facebook: 
 								<a target="_blank" href="https://fb.me/8moonsbazaar" class=''>fb.me/8moonsbazaar</a>
 							</p>
 						</li>
-						<li class='nav-item'>
+						<li class='nav-item '>
 							<p>
 								<span class="glyphicon glyphicon-heart-empty"></span> 
 								Siga-nos no Instagram: @8moonsbazaar
@@ -181,7 +168,7 @@
 	<!-- Visualizacao do carrinho -->
 	<div class='container offset-sm-3 popup' style="display: none" id='kartScreen'> 
 		<div class="mailTitle">
-			<h4 class="d-inline underlineClass">Carrinho de Compras</h4>
+			<h4 class="d-inline sectionTitle underlineClass">Carrinho de Compras</h4>
 			<button class="closeButton" type="button" onclick='toggleKart();'>
 				<span class="glyphicon glyphicon-remove "></span>
 			</button>
@@ -215,8 +202,9 @@
 	
 	<!-- Check Out -->
 	<div class='container offset-sm-3 popup' style="display: none" id='mailScreen'> 
+	<!-- <div class='container offset-sm-3 popup' id='mailScreen'>  -->
 		<div class="mailTitle">
-			<h4 class="d-inline underlineClass">Check Out</h4>
+			<h4 class="d-inline sectionTitle underlineClass">Check Out</h4>
 			<button class="closeButton d-inline" type="button" onclick='toggleMail();'>
 				<span class="glyphicon glyphicon-remove "></span>
 			</button>
@@ -242,9 +230,9 @@
 			<textarea class="form-control mailInput" rows="7" cols="80" id="mailBody" readonly>
 			</textarea>	
 		
-			<input type="submit" class="btn btn-primary colorButtons sendButton"></input>	
+			<input type="submit" class="colorButtons sendButton"></input>	
 		</form>
-		<p class="obsClass leftClass bottomClass">obs: Você receberá um e-mail com a cópia do pedido</p>
+		<p class="obsClass leftClass bottomClass">Obs: Você receberá um e-mail com a cópia do pedido</p>
 		
 	</div>
 	

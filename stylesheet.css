@@ -186,6 +186,7 @@ html {
 }
 span {
     font-family: Glyphicons Halflings !important;
+	height: auto;
 }
 h1 {
     margin-bottom: 20px;
@@ -228,6 +229,10 @@ h1 {
     border-bottom: 1.5px solid LightGray;
     border-radius: 10px;
 }
+.sidebar .nav-item :active{
+	box-shadow: 1px 0px 10px black;
+	top: 3px;	
+}
 .sidebar .nav-item + .nav-item {
     margin-left: 0;
 }
@@ -236,7 +241,29 @@ h1 {
     color: white !important;
 }
 .sidebar .nav-link:hover {
+    background-color: #808080 !important;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.navbar .nav-item {
+    width: 100%;
+    border-top: 1.5px solid LightGray;
+    border-bottom: 1.5px solid LightGray;
+    border-radius: 10px;
+}
+.navbar .nav-item :active{
+	box-shadow: 1px 0px 10px black;
+	top: 3px;	
+}
+.navbar .nav-item + .nav-item {
+    margin-left: 0;
+}
+.navbar .nav-link {
     border-radius: 0;
+    color: white !important;
+	padding-left: 10px;
+}
+.navbar .nav-link:hover {
     background-color: #808080 !important;
     font-weight: bold;
     border-radius: 10px;
@@ -273,12 +300,15 @@ h1 {
 	border-bottom: 1px solid #eee;
 }
 .bodyBackground {    
-    background-color: white;
+    /* background-color: white; */
+    background-color: #F5F5F5;
 	color: black;
 }
 .myProduct:hover {
-    background-color: #DCDCDC;
-    border-radius: 20px;
+	box-shadow: 1px 4px 10px black;
+	top: 0.5px;
+	border-radius: 20px;
+    /* background-color: #DCDCDC; */
 }
 .sectionTitle {
     text-align: center;
@@ -286,6 +316,7 @@ h1 {
 	color: black;
     border-radius: 10px;	
 	margin: 5% 30% 0 30%;
+	padding: 1%;
 }
 .bodyTitle {
     text-align: center;
@@ -323,9 +354,6 @@ h1 {
     margin-left: 2%;
     /* border-top: 1px solid LightGray; */
 }
-.miniMenu{
-	/* width: 100%;	 */
-}
 .miniMenuTitle {
     color: white !important;
 }
@@ -334,27 +362,11 @@ h1 {
 	padding:0px;
 	padding-left:15px;
 }
-.miniMenuLi {
-    width: 100%;
-    border-top: 1.5px solid LightGray;
-    border-bottom: 1.5px solid LightGray;
-    border-radius: 10px;
-}
-.miniMenuLi:hover{
-    border-radius: 0;
-    background-color: #e2725b !important;
-    font-weight: bold;
-    border-radius: 10px;	
-}
 .miniMenuUl {
 	padding-left:2px;
 	width: 100%;
 }
 
-.miniMenuOption{
-	background-color:transparent !important;
-	margin-left: 5%;	
-}
 .contactTitleDiv{
 	margin: 3px 0 3px 0 !important;
 }
@@ -406,14 +418,28 @@ h1 {
 	color: black;
 	display: inline-flex;
 	border: none;
+	height: auto;
+	border-radius: 20px;
+}
+button:hover {
+	box-shadow: 1px 4px 10px black;
+	top: 2px;
+	border-radius: 20px;
+}
+button:active {
+	box-shadow: 1px 0px 10px black;
+	top: 6px;
+	border-radius: 20px;
 }
 .miniButtonsBar{
 	display: inline-block;
     vertical-align: top;
 }
 #kartScreen {
-	background-color: black;
-	color: white;
+	/* background-color: black; */
+	/* color: white; */
+	background-color: #F5F5F5;
+	color: black;
 	margin: auto;
 	width: 80%;
 	min-width: 15%;
@@ -424,8 +450,10 @@ h1 {
 	padding: 2% 2% 2% 2%;
 }
 #mailScreen {
-	background-color: black;
-	color: white;
+	/* background-color: black; */
+	/* color: white; */
+	background-color: #F5F5F5;
+	color: black;
 	margin: auto;
 	width: 80%;
 	min-width: 15%;
@@ -510,21 +538,35 @@ h1 {
 	padding: 0 0 0 3px;
 }
 .colorButtons{
+	color: white;
 	background-color: gray;	
 	border-color: lightgray;
 }
-
 .sendButton{
 	float: right; 
 	margin: 1% 1% 1% 1%;
+	border-radius: 20px;
+	font-size: 14px;
+	padding: 6px 12px 6px 12px;
+	line-height: 1.5;
+}
+.sendButton:hover{
+	box-shadow: 1px 4px 10px black;
+	top: 15px;
+	border-radius: 20px;
+}
+.sendButton:active{
+	box-shadow: 1px 0px 10px black;
+	top: 6px;
+	border-radius: 20px;
 }
 
 .popup{
 	border: 3px solid #a9a9a9;
+	min-height: 300px;
 }
 
-.disableClass
-{
+.disableClass{
 	pointer-events: none;
 	opacity: 0.5;
 }

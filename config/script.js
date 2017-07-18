@@ -2,7 +2,21 @@
 // ALT + SHIFT + 0  e  ALT+2
 // Realiza o login
 /*eslint-disable no-undef */
+var myItens = {};
+
 logIn = function() {
+	// Mapeia acao para mudanca de status (logIn / logOut)
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			loadMaintScreen();
+			console.log("User OK");
+			toggleScreen("i");
+		} else {
+			console.log("User NOT OK");
+			toggleScreen("o");
+		}
+	});
+	
 	// var email = $('#inputEmail').val();
 	// var password = $('#inputSenha').val();
 	var email = 'admin@8moon.com';
@@ -10,22 +24,8 @@ logIn = function() {
 
 	// Autentica usuario		
 	firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-//		var errorCode = error.code;
-//		var errorMessage = error.message;
-		// alert(errorMessage);
 		console.log(error);
-	});
-
-	// Mapeia acao para mudanca de status (logIn / logOut)
-	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			loadMaintScreen();
-			console.log("LogIn");
-			toggleScreen("i");
-		} else {
-			console.log("LogOut");
-			toggleScreen("o");
-		}
+		toggleScreen("o");
 	});
 };
 
@@ -94,8 +94,11 @@ updateItem = function(itemId) {
 deleteItem = function(itemId) {
 	var refPath = "products/" + itemId;
 	var itemRef = firebase.database().ref(refPath);
-	itemRef.remove();
 
+	
+	deleteImg(itemId);
+	itemRef.remove();
+	
 	loadItens();
 };
 
@@ -127,6 +130,22 @@ uploadImg = function(imgFile, newId) {
 	var uploadTask = storageRef.child(storagePath).put(imgFile);
     // Inicia o onitor de status do upload
 	startMonitor(uploadTask, newId);
+};
+
+// Deleta imagem do storage
+deleteImg = function(itemId) {	
+	var storagePath = "images/" + myItens[itemId].img;
+	var imgRef = firebase.storage().ref(storagePath);
+	
+	setScreen("d");
+	
+	imgRef.delete().then(function() {
+		confirm("Item removido com sucesso");
+		setScreen("e");
+	}).catch(function(error) {
+		alert("Erro ao remover a imagem do repositorio!" + "\n" + "Favor entrar em contato com o admnistrador");
+		setScreen("e");
+	});
 };
 
 startMonitor = function(uploadTask, itemId) {	
@@ -198,7 +217,6 @@ set2Upd = function(itemId) {
 
 // Insere itens na tabela de manutencao
 appendHTML = function(itens) {
-	var itemKeys = Object.keys(itens);
 	// Monta cabeçalho
 	var code = "<table class='table'> <thead> <tr>" +
 		"<th>Departamento</th>" +
@@ -208,8 +226,7 @@ appendHTML = function(itens) {
 		"<th>Edit/Dele</th> " +
 		"</tr> </thead> <tbody>";
 	// Monta tabela de produtos
-	for (var i in itemKeys) {
-		var id = itemKeys[i].toString();
+	for (var id in itens) {
 		var tableLine = "<tr id='" + id + "'>" +
 			"<td class='viewField'> <p id='' type='text' class=''>" + itens[id].dept + "</p> </td>" +
 			"<td class='editField'> <input id='dept' type='text' class='form-control' value='" + itens[id].dept + "'></input> </td>" +
@@ -241,8 +258,11 @@ loadItens = function() {
 	var databaseRef = firebase.database().ref();
 	databaseRef.once("value").then(function(snapshot) {
 		var myData = snapshot.child('products').val();
+		myItens = {};
+		myItens = Object.assign({}, myData);
+		
 		// Monta o HTML
-		appendHTML(myData, '');
+		appendHTML(myData);
 	});
 };
 
@@ -257,7 +277,6 @@ var config = {
 };
 
 ////// Inicializando ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// $(document).onload(function() {
 $(document).ready(function() {
 	firebase.initializeApp(config);
 	// loadMaintScreen();
