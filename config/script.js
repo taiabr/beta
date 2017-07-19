@@ -1,31 +1,35 @@
 /*eslint-env jquery */
-// ALT + SHIFT + 0  e  ALT+2
+// ALT + SHIFT + 0  e  ALT+1
 // Realiza o login
 /*eslint-disable no-undef */
 var myItens = {};
 
 logIn = function() {
-	// Mapeia acao para mudanca de status (logIn / logOut)
+	// Trigger para mudanca de status (logIn / logOut)
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			loadMaintScreen();
 			console.log("User OK");
-			toggleScreen("i");
 		} else {
 			console.log("User NOT OK");
-			toggleScreen("o");
 		}
 	});
 	
-	// var email = $('#inputEmail').val();
-	// var password = $('#inputSenha').val();
-	var email = 'admin@8moon.com';
-	var password = 'admin.password';
-
-	// Autentica usuario		
-	firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-		console.log(error);
-		toggleScreen("o");
+	// Autentica usuario	
+	var email = $('#inputEmail').val();			// 'admin@8moon.com'
+	var password = $('#inputSenha').val();		// 'admin.password'	
+	firebase.auth().signInWithEmailAndPassword(email, password)
+		.then(function(user) {
+			if (user) {
+				toggleScreen("i");
+				loadMaintScreen();
+				$('#inputEmail').val("");
+				$('#inputSenha').val("");
+			};
+		})
+		.catch(function(error) {
+			console.log(error);
+			alert(error.message);
+			toggleScreen("o");
 	});
 };
 
@@ -39,13 +43,17 @@ loadMaintScreen = function() {
 
 // Realiza o logout
 logOut = function() {
-	firebase.auth().signOut().then(function() {
-		// Sign-out successful.
-		console.log("Log Out com sucesso");
-		toggleScreen("o");
-	}, function(error) {
-		alert("Não foi possível realizar o Log Out");
-	});
+	if (firebase.auth().currentUser) {
+		firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+			console.log("Log Out com sucesso");
+			toggleScreen("o");
+		}, function(error) {
+			alert("Não foi possível realizar o Log Out");
+		});
+	} else {
+		alert("Nenhum usuario logado");
+	};
 };
 
 // Exibe/Esconde tela de Login
@@ -106,11 +114,11 @@ deleteItem = function(itemId) {
 insertItem = function() {
 	// Monta novo produto
 	var newItem = {};
-	newItem["name"] = $('#formName').attr('value');
-	newItem["value"] = $('#formValue').attr('value');
-	newItem["qtd"] = $('#formQtd').attr('value');
-	newItem["size"] = $('#formSize').attr('value');
-	newItem["dept"] = $('#formDept').attr('value');
+	newItem["name"] = $('#formName').val();
+	newItem["value"] = $('#formValue').val();
+	newItem["qtd"] = $('#formQtd').val();
+	newItem["size"] = $('#formSize').val();
+	newItem["dept"] = $('#formDept').val();
     // Recupera imagem
 	var imgFile = $('#formImg').prop('files');
 	newItem["img"] = imgFile[0].name;
@@ -157,8 +165,7 @@ startMonitor = function(uploadTask, itemId) {
 		setScreen("e");
 	} else {
     
-    	uploadTask.on('state_changed', 
-    	   function(snapshot) {
+    	uploadTask.on('state_changed', function(snapshot) {
     		var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     		console.log('Progresso: ' + progress + '%');
     		switch (snapshot.state) {
@@ -166,7 +173,7 @@ startMonitor = function(uploadTask, itemId) {
     				console.log('Upload foi pausado');
     				break;
     			case 'running':
-    				console.log('Upload em andamento');
+    				// console.log('Upload em andamento');
     				break;
     		}
     
