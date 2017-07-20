@@ -1,9 +1,5 @@
 // ALT + SHIFT + 0  e  ALT+2 e ALT+1
 
-var myDeparts = [];
-var imgsMapp = [];	
-var myGrid = {};
-var myKart = {};
 var firebaseConfig = {
 	apiKey: "AIzaSyCYsRQQ2xTOkE7XIJSQxQYM_WaKsa-gtvY",
 	authDomain: "moons-bazzar.firebaseapp.com",
@@ -12,6 +8,10 @@ var firebaseConfig = {
 	storageBucket: "moons-bazzar.appspot.com",
 	messagingSenderId: "244394754480"
 };	
+var myDeparts = [];
+var imgsMapp = [];	
+var myGrid = {};
+var myKart = {};
 
 // Grid
 var clGrid = class{
@@ -88,9 +88,11 @@ var clGrid = class{
 						// Monta codigo do grid
 						var newProd 
 								= "<div class='col-6 col-sm-3 placeholder myProduct' id='" + id + "'>" 
-								// + "<a target='_blank' href='" + thisProd.img + "'>"
 								+ "<a target='_blank' id='" + linkID + "'>"
-								+ "<img id='" + imgId +  "' width='200' height='200' class='img-fluid' alt='" + thisProd.name + "'>" 
+								+ "<div class='imgDiv'>"
+								+ "<img id='" + imgId +  "' class='img-fluid prodImg' alt='" + thisProd.name + "'>" 
+								+ "<span class='glyphicon glyphicon-zoom-in prodZoom'></span>" 
+								+ "</div>" 
 								+ "</a>" 
 								+ "<table class='table'>" 
 								+ "<tbody>" 
@@ -119,7 +121,7 @@ var clGrid = class{
 				};
 				
 				var newDepart 
-							= "<h3 class='sectionTitle' id='" + depart + "'>" + depart + "</h3>" 
+							= "<h3 class='sectionTitle underlineClass' id='" + depart + "'>" + depart + "</h3>" 
 							+ "<section class='row text-center placeholders mySection'>" 
 							+ departProds 
 							+ "</section>";
