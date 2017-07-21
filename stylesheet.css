@@ -523,10 +523,11 @@ button:active {
 	text-align: center;
 }
 .configBackground{
-	margin: 5% 25% 5% 25%; 
+	/* margin: 5% 25% 5% 25%;  */
 	height: auto;
 	background-color: black;
 	color: white;
+	font-size: 12px;
 }
 .removeBtn{
 	font-size: 15px;
@@ -649,4 +650,16 @@ button:active {
 }
 .imgDiv:hover .prodZoom {
     display: block
+}
+
+.wid100pc{
+	width: 100%;
+}
+
+.spaceBtwn{
+	justify-content: space-between;
+}
+
+.margin1pc{
+	margin: 1%;
 }

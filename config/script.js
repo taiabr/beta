@@ -21,6 +21,8 @@ logIn = function() {
 	});
 	
 	// Recupera informacoes
+	// var email = "admin@8moon.com";			
+	// var password = "admin.password";	
 	var email = $('#inputEmail').val();			
 	var password = $('#inputSenha').val();		
 	
@@ -148,24 +150,27 @@ loadItens = function() {
 appendHTML = function(myItens) {
 	// Monta cabeçalho
 	var code = "<table class='table'> <thead> <tr>" +
-		"<th>Departamento</th>" +
-		"<th>Produto</th>" +
-		"<th>Quantidade</th> " +
-		"<th>Valor</th> " +
-		"<th>Edit/Dele</th> " +
+		"<th class='centerClass'>Depart.</th>" +
+		"<th class='centerClass'>Produto</th>" +
+		"<th class='centerClass'>Tamanho</th>" +
+		"<th class='centerClass'>Qtd</th> " +
+		"<th class='centerClass'>Valor</th> " +
+		"<th class='centerClass'>Edit/Dele</th> " +
 		"</tr> </thead> <tbody>";
 		
 	// Monta tabela de produtos
 	for (var id in myItens) {
 		var tableLine = "<tr id='" + id + "'>" +
-			"<td class='viewField'> <p id='' type='text' class=''>" + myItens[id].dept + "</p> </td>" +
 			"<td class='editField' style='display: none'> <input id='dept' type='text' class='form-control' value='" + myItens[id].dept + "'></input> </td>" +
-			"<td class='viewField'> <p id='' type='text' class='viewFields'>" + myItens[id].name + "</p> </td>" +
-			"<td class='editField' style='display: none''> <input id='name' type='text' class='form-control' value='" + myItens[id].name + "'></input> </td>" +
-			"<td class='viewField'> <p id='' type='number' class='viewFields'>" + myItens[id].qtd + "</p> </td>" +
+			"<td class='editField' style='display: none'> <input id='name' type='text' class='form-control' value='" + myItens[id].name + "'></input> </td>" +
+			"<td class='editField' style='display: none'> <input id='size' type='text' class='form-control' value='" + myItens[id].size + "'></input> </td>" +
 			"<td class='editField' style='display: none'> <input id='qtd' type='number' class='form-control' value='" + myItens[id].qtd + "'></input> </td>" +
-			"<td class='viewField'> <p id='' type='number' class='viewFields' step='0.01'>" + myItens[id].value + "</p> </td>" +
 			"<td class='editField' style='display: none'> <input id='value' type='number' class='form-control' value='" + myItens[id].value + "' step='0.01'></input> </td>" +
+			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].dept + "</p> </td>" +
+			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].name + "</p> </td>" +
+			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].size + "</p> </td>" +
+			"<td class='viewField centerClass'> <p id='' type='number'>" + myItens[id].qtd + "</p> </td>" +
+			"<td class='viewField centerClass'> <p id='' type='number' step='0.01'>" + myItens[id].value + "</p> </td>" +
 			"<td> <span onclick=\"actUpdate('" + id + "');\" class='glyphicon glyphicon glyphicon-edit editBtn'></span>" +
 			"<span onclick=\"actDelete('" + id + "');\" class='glyphicon glyphicon-remove-circle removeBtn'></span> </td>" +
 			"</tr>";
@@ -275,6 +280,7 @@ updateItem = function(itemId) {
 	var updObj = {
 		"dept": "",
 		"name": "",
+		"size": "",
 		"qtd": "",
 		"value": "",
 	};

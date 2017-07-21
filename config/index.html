@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Bootstrap CSS -->
-	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Estilos -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
@@ -17,74 +17,74 @@
 	<title>8Moons Config</title>
 </head>
 
-<body class='configBackground'>
-    <div class="container">
-
-    	<!-- POP-UP FOR LOGIN -->
-    	<div id='loginScreen'>
-    		<form class="form-signin">
-    			<h2 class="form-signin-heading">Insira e-mail e senha:</h2>
-    			<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
-    			<input type="password" id="inputSenha" class="form-control" placeholder="Senha" required>
-    			<div class="checkbox"></div>
-				<button class="btn btn-primary btn-block btn-lg singInBtn" type="submit" onclick='logIn();return false;'>Log In</button>
-				<a href='resetPassword();' class="whiteClass rightClass">Esqueci minha senha</a>
-    		</form>
-    	</div>
-
-    </div>
+<body class='configBackground noXOverflowImp'>
+    <!-- POP-UP FOR LOGIN -->
+	<div id='loginScreen' class='container'>
+		<form class="form-signin">
+			<h2 class="form-signin-heading centerClass">Insira e-mail e senha:</h2>
+			<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+			<input type="password" id="inputSenha" class="form-control" placeholder="Senha" required>
+			<div class="checkbox"></div>
+			<button class="btn btn-primary btn-block btn-lg singInBtn" type="submit" onclick='logIn();return false;'>Log In</button>
+			<a href='resetPassword();' class="whiteClass rightClass">Esqueci minha senha</a>
+		</form>
+	</div>
 			
-	<div class='container-fluid' style="display: none" id='maintScreen'>
-		<h1 id='welcomeText'></h1>
+    <!-- TELA PRINCIPAL -->
+	<div class='container-fluid noXOverflowImp' style="display: none" id='maintScreen'>
+		<h1 id='welcomeText' class="centerClass"></h1>
 		<!-- Manutenção - Desktop -->
 		<form onsubmit='javascript:actInsert();return false;'>
 			<div class="form-group">
-				<label for="formDept">Departamento</label>
+				<label for="formDept">Departamento:</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="formDept" placeholder="Departamento" required>
+					<input type="text" class="form-control" id="formDept" placeholder="DEPARTAMENTO" required>
 					<div class="input-group-addon redClass">*</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="formName">Nome</label>
+				<label for="formName">Nome:</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="formName" placeholder="Nome" required>
+					<input type="text" class="form-control" id="formName" placeholder="Nome do Produto" required>
 					<div class="input-group-addon redClass">*</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="formSize">Tamanho</label>
+				<label for="formSize">Tamanho:</label>
 				<div class="input-group">
-					<input type="text" class="form-control" id="formSize" placeholder="Tamanho" required>
+					<input type="text" class="form-control" id="formSize" placeholder="P/M/G" required>
 					<div class="input-group-addon redClass">*</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="formValue">Valor</label>
+				<label for="formValue">Valor (R$):</label>
 				<div class="input-group">
-					<input type="number" step='0.01' class="form-control" id="formValue" placeholder="Valor" required>
+					<input type="number" step='0.01' class="form-control" id="formValue" placeholder="00.00" required>
 					<div class="input-group-addon redClass">*</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="formQtd">Quantidade</label>
+				<label for="formQtd">Quantidade:</label>
 				<div class="input-group">
-					<input type="number" class="form-control" id="formQtd" placeholder="Quantidade" required>
+					<input type="number" class="form-control" id="formQtd" placeholder="0" required>
 					<div class="input-group-addon redClass">*</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="formImg">Imagem</label>
+				<label for="formImg">Imagem:</label>
 				<div class="input-group">
-					<input type="file" class="form-control-file " id="formImg" required>
+					<input type="file" class="form-control-file wid100pc" id="formImg" required>
 					<div class="input-group-addon redClass">*</div>
 				</div>
 			</div>
-
-			<input type="submit" class="btn btn-primary colorButtons"></input>		
-			<input type="reset" class="btn btn-primary colorButtons"></input>
-			
-			<input type="button" class="btn btn-primary colorButtons rightClass" value="Log Out" onclick="logOut()"></input>
+			<p class="obsClass redClass rightClass margin1pc">* Campos obrigatórios</p>
+			<div class="input-group">
+				<div class="input-group">
+					<input type="submit" class="btn btn-primary colorButtons"></input>	
+					<input type="reset" class="btn btn-primary colorButtons"></input>					
+				</div>
+				<input type="button" class="btn btn-primary colorButtons rightClass" value="Log Out" onclick="logOut()"></input>
+			</div>
 		</form>
 
 		<hr>

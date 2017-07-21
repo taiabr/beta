@@ -71,7 +71,8 @@
 					<span class="glyphicon glyphicon-shopping-cart"></span>
 				</button>	
 				<!-- ABRIR/FECHAR MENU - MOBILE -->
-				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-label="Abrir menu">
+				<!-- <button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"> -->
 					<span class="glyphicon glyphicon-menu-hamburger"></span>
 				</button>
 			</div>	
@@ -95,7 +96,7 @@
 						</a>
 					</li>
 					<li class="nav-item myItem">
-						<a class="nav-link" target="_blank" href="config/index.html">
+						<a class="nav-link" target="_blank" href="config/index.html" id='maintBtn'>
 							<span class="glyphicon glyphicon-wrench"></span>
 							Manutenção
 						</a>
@@ -176,9 +177,10 @@
 			  <tr>
 				<th>Produto</th>
 				<th>Tamanho</th>
-				<th>Valor</th>
+				<th class="hidden-xs-down">Valor (R$)</th>
+				<th class="hidden-sm-up">Vlr.</th>
 				<th class="hidden-xs-down">Quantidade</th>
-				<th class="hidden-sm-up">Qtd</th>
+				<th class="hidden-sm-up">Qtd.</th>
 				<th>Remove</th>
 			  </tr>
 			</thead>
