@@ -1,12 +1,12 @@
 // ALT + SHIFT + 0  e  ALT+2 e ALT+1
 
 var firebaseConfig = {
-	apiKey: "AIzaSyCYsRQQ2xTOkE7XIJSQxQYM_WaKsa-gtvY",
-	authDomain: "moons-bazzar.firebaseapp.com",
-	databaseURL: "https://moons-bazzar.firebaseio.com",
-	projectId: "moons-bazzar",
-	storageBucket: "moons-bazzar.appspot.com",
-	messagingSenderId: "244394754480"
+    apiKey: "AIzaSyCKNcEvx2LnTQNxV0oAvcMsi4hyKRTIas0",
+    authDomain: "moonsbazaar.firebaseapp.com",
+    databaseURL: "https://moonsbazaar.firebaseio.com",
+    projectId: "moonsbazaar",
+    storageBucket: "moonsbazaar.appspot.com",
+    messagingSenderId: "220986707501"
 };	
 var myDeparts = [];
 var imgsMapp = [];	
@@ -14,21 +14,25 @@ var myGrid = {};
 var myKart = {};
 
 // Grid
-var clGrid = class{
+var clGrid = {
 	// Carrega o grid - loadGrid
-	static load() {
-		// Busca valores do firebase
-		var ref = firebase.database().ref();
-		ref.once("value").then(function(snapshot) {
-			var myData = snapshot.child('products').val();
-			
-			myGrid = Object.assign({}, myData);
-			clGrid.appendItens(myGrid);	
-			setImgMapping(imgsMapp);	   
-		});
-	};
+	load: function() {
+		try {
+			// Busca valores do firebase
+			var ref = firebase.database().ref();
+			ref.once("value").then(function(snapshot) {
+				var myData = snapshot.child('products').val();
+				
+				myGrid = Object.assign({}, myData);
+				clGrid.appendItens(myGrid);	
+				setImgMapping(imgsMapp);	 
+			});  
+		} catch(err) {
+			console.log("Não foi possível acessar o Firebase:" + "\n" + err.message);
+		};
+	},
 	// Recupera departamentos - getarrayDepart
-	static getDeparts(objProds) {
+	getDeparts: function(objProds) {
 		myDeparts = [];
 		for(var id in objProds) {		
 			var thisDepart = myDeparts.find( function(depart){ 
@@ -39,9 +43,9 @@ var clGrid = class{
 			};				
 		};		
 		return myDeparts;
-	};		
+	},
 	// Monta o menu com os departamentos existentes
-	static setMenuOptions(departs){
+	loadMenuOptions: function(departs){
 		var code = "";
 		for(var i = 0; i < departs.length; i++){
 			code += "<li class='nav-item'>"
@@ -50,9 +54,9 @@ var clGrid = class{
 		};
 		$("#menuOptions").append(code);
 		$("#menuOptionsMobile").append(code);
-	};
+	},
 	// Insere HTML dos produtos no grid - appendGridItens
-	static appendItens(myProds) {
+	appendItens: function(myProds) {
 
 		var code = '';
 		
@@ -61,7 +65,7 @@ var clGrid = class{
 		$('#pageGrid section').remove();
 		
 		myDeparts = clGrid.getDeparts(myProds);		
-		clGrid.setMenuOptions(myDeparts);
+		clGrid.loadMenuOptions(myDeparts);
 		
 		//Cada departamento
 		myDeparts.forEach(function(depart) {
@@ -116,7 +120,7 @@ var clGrid = class{
 								+ "</div>";
 
 						departProds += newProd;
-						setImgForMapp(thisProd.img, imgId);
+						setImgForMapp( 'products', thisProd.img, imgId);
 					};
 				};
 				
@@ -140,9 +144,9 @@ var clGrid = class{
 			// Adiciona ao myKart[]
 			clKart.addItem(itemId, 1);
 		});
-	};
+	},
 	//Busca produtos de certo departamento
-	static getFilteredProds(myProds, property, value){
+	getFilteredProds: function(myProds, property, value){
 		var filteredProds = {};
 		
 		for(var id in myProds){
@@ -154,19 +158,19 @@ var clGrid = class{
 		};
 		
 		return filteredProds;
-	};
+	},
 }; // end-clGrid
 
 // Carrinho
-var clKart = class{
+var clKart = {
 	// Exibe/Esconde tela do carrinho - toggleKart
-	static toggle() {
+	toggle: function() {
 		disableMain();
 		$('#kartScreen').toggle();
 		clKart.load();			
-	};
+	},
 	//Adiciona ao carrinho - addToKart
-	static addItem(itemId, addQtd) {
+	addItem: function(itemId, addQtd) {
 		// Busca item no Grid
 		var gridItem = getById(itemId, myGrid);
 		// Busca item no carrinho
@@ -189,17 +193,17 @@ var clKart = class{
 				kartItem.qtd += addQtd;
 			};
 		};
-	};
+	},
 	// Carrega informação do carrinho - loadKart
-	static load() {
+	load: function() {
 		// Limpa a tabela HTML do carrinho
 		$("#kartResult tr").remove();
 		
 		// Carrega a tabela HTML com o carrinho atualizado
 		for (var id in myKart) { if (myKart[id].qtd > 0) { clKart.appendItem(id) } };
-	};
+	},
 	// Insere HTML de item do carrinho - appendKartItem
-	static appendItem(itemId) {
+	appendItem: function(itemId) {
 		var kartItem = getById(itemId, myKart);
 		// Monta ID para o botao
 		var btnId = 'remove' + itemId;
@@ -227,43 +231,60 @@ var clKart = class{
 			clKart.removeItem(itemId);
 			clKart.load();
 		});
-	};
+	},
 	// Remove do carrinho - removeFromKart
-	static removeItem(itemId) {		
+	removeItem: function(itemId) {		
 		var myItem = getById(itemId, myKart);
 		if (myItem.qtd > 1) {
 			myItem.qtd -= 1;
 		} else {
 			myItem.qtd = 0;
 		};
-	};
+	},
 	// Limpa o carrinho - clearKart
-	static clear() {
+	clear: function() {
 		myKart = {};
 		// $("#kartResult tr").remove(); 
 		clKart.load();
-	};
+	},
 	// Check Out
-	static checkOut() {
+	checkOut: function() {
 		if(Object.entries(myKart).length > 0){
 			clKart.toggle();
 			clMail.toggle();				
 		} else {
 			alert("Carrinho vazio");
 		};
-	};		
+	},
 }; // end-clKart
 
 // Check Out
-var clMail = class{	
+var clMail = {	
+	_mail: "",
+	_password: "",
+		
+	// Recupera informações de login para envio de email
+	getMyUser: function(){
+		try {
+			// Busca dados do firebase
+			var ref = firebase.database().ref();
+			ref.once("value").then(function(snapshot) {
+				var myData = snapshot.child('mailInfo').val();
+				clMail._mail = myData.mail;
+				clMail._password = myData.password;
+			});  
+		} catch(err) {
+			console.log("Não foi possível acessar o Firebase:" + "\n" + err.message);
+		};		
+	},	
 	// Exibe/Esconde tela do Check Out
-	static toggle(){
+	toggle: function(){
 		disableMain();
 		$('#mailScreen').toggle();
 		clMail.load();
-	};
+	},
 	// Carrega formulario do email
-	static load(){
+	load: function(){
 		var totValue = 0.00;			
 		var mail = "";
 		
@@ -276,23 +297,24 @@ var clMail = class{
 		mail += "Total(R$): " + totValue;
 		
 		$("#mailBody").text(mail);
-	};
+	},
 	// Monta texto de email do item
-	static concatItem(item){
+	concatItem: function(item){
 		return "\t" + "Produto:" 
 			+ "\n" + "\t" + "\t" + "Nome: " +  item.name 
 			+ "\n" + "\t" + "\t" + "Tamanho: " + item.size
 			+ "\n" + "\t" + "\t" + "Qtd: " + item.qtd
 			+ "\n" + "\t" + "\t" + "Valor(un.): " + item.value
 			+ "\n";
-	};
+	},
 	// Limpa formulario de email
-	static clear(){
+	clear: function(){
 		$(".mailInput").text('');	 		
-	};
+	},
 	// Envia o email
-	static send(){			
-		// Recupera e valida as informações do usuário
+	send: function(){			
+		// Recupera e valida as informações do usuário						
+		clMail.getMyUser();
 		var mailName = $("#mailName").val();
 		var mailAddres = $("#mailAddres").val();
 		var mailPhone = $("#mailPhone").val();			
@@ -307,8 +329,9 @@ var clMail = class{
 						+ "\n" + "\t" + "Telefone: " + mailPhone;	
 					
 		// Monta email
-		var mailFrom = "contato.8moons@hotmail.com";
-		var mailTo = "contato.8moons@hotmail.com" + ", " + mailAddres;
+		// var mailFrom = "8moons.bazzar@gmail.com";
+		// var mailTo = "8moons.bazzar@gmail.com" + ", " + mailAddres;
+		var mailTo = clMail._mail + ", " + mailAddres;
 		var mailSubj = "[PEDIDO] " + mailName + " | " + new Date().toISOString() ;						
 		var mailBody = "Carrinho:" 
 					+ "\n" + userProds
@@ -319,20 +342,20 @@ var clMail = class{
 		
 		// Envia email
 		if( confirm("Enviar pedido?") ){
-			Email.send( mailFrom,
-						mailTo,
-						mailSubj,
-						mailBody,
-						"smtp.live.com",
-						"contato.8moons@hotmail.com",
-						"lu044118");
+			Email.send( clMail._mail,		//from
+						mailTo,				//to
+						mailSubj,			//subject
+						mailBody,			//body
+						"smtp.live.com",	//server
+						clMail._mail,		//login
+						clMail._password);	//password
 			clMail.clear();
 			clMail.toggle();			
 			alert("Pedido enviado!");
 		};
-	};
+	},
 	// Valida informações do usuário
-	static validate(name, mail, phone){		
+	validate: function(name, mail, phone){		
 		// Nome
 		var nameErro = false;					
 		if (nameErro){ alert("Nome inválido!") };
@@ -343,7 +366,7 @@ var clMail = class{
 		var phoneErro = false;			
 		if (phone.length < 9){ phoneErro = true };			
 		if (phoneErro){ alert("Telefone inválido!") };
-	};
+	},
 }; // end-clMail
 	
 sendMail = function(){
@@ -375,23 +398,23 @@ getById = function(itemId, obj){
 		};
 	};			
 };
-setImgForMapp = function(imgPath, id){
-	var imgID = '#' + id;
-	var map = {img: imgPath , id: imgID };
+setImgForMapp = function(imgForlder, imgPath, itemId){
+	var imgID = '#' + itemId;
+	var map = {path: imgForlder, img: imgPath, id: imgID };
 	imgsMapp.push(map);
 };
 setImgMapping = function(mapArray){
 	for (var i = 0; i < mapArray.length; i++){
-		setImg2Screen(mapArray[i].img, mapArray[i].id) 
+		setImg2Screen(mapArray[i].path, mapArray[i].img, mapArray[i].id) 
 	};		
 };
-setImg2Screen = function(imgPath, imgID){
+setImg2Screen = function(imgForlder, imgPath, imgID){
 	var storage = firebase.storage();
 	var storageRef = storage.ref();
-	var imagesRef = storageRef.child('images');	
+	var imagesRef = storageRef.child(imgForlder);	
 	imagesRef.child(imgPath).getDownloadURL().then(function(url) {				
-		var linkID = imgID + 'a';
 		$(imgID).attr("src", url);
+		var linkID = imgID + 'a';
 		$(linkID).attr("href", url);
 	});
 };
@@ -400,5 +423,5 @@ setImg2Screen = function(imgPath, imgID){
 $(document).ready(function() {
 	firebase.initializeApp(firebaseConfig);
 	clGrid.load();
-	setImgForMapp("logo-compact.png", "logoImg");	
+	setImgForMapp("logo", "logo-compact.png", "logoImg");	
 }); // end-$(document).ready

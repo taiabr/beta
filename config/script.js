@@ -1,11 +1,11 @@
 // ALT + SHIFT + 0  e  ALT+1
 var firebaseConfig = {
-	apiKey: "AIzaSyCYsRQQ2xTOkE7XIJSQxQYM_WaKsa-gtvY",
-	authDomain: "moons-bazzar.firebaseapp.com",
-	databaseURL: "https://moons-bazzar.firebaseio.com",
-	projectId: "moons-bazzar",
-	storageBucket: "moons-bazzar.appspot.com",
-	messagingSenderId: "244394754480"
+    apiKey: "AIzaSyCKNcEvx2LnTQNxV0oAvcMsi4hyKRTIas0",
+    authDomain: "moonsbazaar.firebaseapp.com",
+    databaseURL: "https://moonsbazaar.firebaseio.com",
+    projectId: "moonsbazaar",
+    storageBucket: "moonsbazaar.appspot.com",
+    messagingSenderId: "220986707501"
 };
 var myItens = {};
 
@@ -21,7 +21,7 @@ logIn = function() {
 	});
 	
 	// Recupera informacoes
-	// var email = "admin@8moon.com";			
+	// var email = "8moons.bazzar@gmail.com";			
 	// var password = "admin.password";	
 	var email = $('#inputEmail').val();			
 	var password = $('#inputSenha').val();		
@@ -214,7 +214,7 @@ uploadImg = function(imgFile) {
 	var storageRef = storage.ref();
 	
     // Faz upload da imagem
-	var storagePath = "images/" + imgFile.name;
+	var storagePath = "products/" + imgFile.name;
 	return storageRef.child(storagePath).put(imgFile);
 };
 
@@ -311,7 +311,7 @@ actDelete = function() {
 
 // Deleta imagem do storage
 deleteImg = function(itemId) {	
-	var storagePath = "images/" + myItens[itemId].img;
+	var storagePath = "products/" + myItens[itemId].img;
 	var imgRef = firebase.storage().ref(storagePath);
 	
 	// Desabilita tela
