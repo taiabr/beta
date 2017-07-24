@@ -171,8 +171,10 @@ appendHTML = function(myItens) {
 			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].size + "</p> </td>" +
 			"<td class='viewField centerClass'> <p id='' type='number'>" + myItens[id].qtd + "</p> </td>" +
 			"<td class='viewField centerClass'> <p id='' type='number' step='0.01'>" + myItens[id].value + "</p> </td>" +
-			"<td> <span onclick=\"actUpdate('" + id + "');\" class='glyphicon glyphicon glyphicon-edit editBtn'></span>" +
-			"<span onclick=\"actDelete('" + id + "');\" class='glyphicon glyphicon-remove-circle removeBtn'></span> </td>" +
+			"<td class='inline'>" +
+			"<span onclick=\"actUpdate('" + id + "');\" class='glyphicon glyphicon glyphicon-edit maintBtn '><p class='fontSize10px'> Editar</p></span>" +
+			// "<p> / </p>" +
+			"<span onclick=\"actDelete('" + id + "');\" class='glyphicon glyphicon-remove-circle maintBtn '><p class='fontSize10px'> Deletar</p></span> </td>" +
 			"</tr>";
 
 		code += tableLine;

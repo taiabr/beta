@@ -530,6 +530,11 @@ button:active {
 	color: white;
 	font-size: 12px;
 }
+.maintBtn{
+	font-size: 15px;
+	vertical-align: bottom;
+	margin: auto;
+}
 .removeBtn{
 	font-size: 15px;
 	vertical-align: bottom;
@@ -667,4 +672,8 @@ button:active {
 
 .mailInput .obsClass{
 	margin-top: 1%;
+}
+
+.fontSize10px{
+	font-size: 10px;
 }
