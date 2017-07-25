@@ -54,7 +54,7 @@ clGrid.loadMenuOptions = function(departs){
 	var code = "";
 	for(var i = 0; i < departs.length; i++){
 		code += "<li class='nav-item'>"
-			+ "<a class='nav-link' href='#" + departs[i].toUpperCase()+ "'>" + departs[i] + "</a>"
+			+ "<a class='nav-link' href='#" + departs[i] + "'>" + departs[i] + "</a>"
 			+ "</li>" + "\n";
 	};
 	$("#menuOptions").append(code);

@@ -121,6 +121,7 @@ toggleAbility = function(mode) {
 initMaintScreen = function() {
 	// Seta titulo de boas vindas
 	$("#welcomeText").text( "Bem vindo(a) " + firebase.auth().currentUser.displayName + " !");
+	// $("#welcomeText").text( "Bem vindo(a) " +  " !");
 	
 	// Carrega produtos
 	loadItens();
@@ -149,32 +150,30 @@ loadItens = function() {
 // Insere itens na tabela de manutencao
 appendHTML = function(myItens) {
 	// Monta cabeçalho
-	var code = "<table class='table'> <thead> <tr>" +
-		"<th class='centerClass'>Depart.</th>" +
-		"<th class='centerClass'>Produto</th>" +
-		"<th class='centerClass'>Tamanho</th>" +
-		"<th class='centerClass'>Qtd</th> " +
-		"<th class='centerClass'>Valor</th> " +
-		"<th class='centerClass'>Edit/Dele</th> " +
+	var code = "<table class='table'> <thead class='backGrayClass'> <tr>" +
+		"<th class='underlineClass fontSize14px centerClass'>Depart.</th>" +
+		"<th class='underlineClass fontSize14px centerClass'>Produto</th>" +
+		"<th class='underlineClass fontSize14px centerClass'>Tamanho</th>" +
+		"<th class='underlineClass fontSize14px centerClass'>Qtd</th> " +
+		"<th class='underlineClass fontSize14px centerClass'>Valor</th> " +
+		"<th colspan='2' class='underlineClass fontSize14px centerClass'>Ações</th> " +
 		"</tr> </thead> <tbody>";
 		
 	// Monta tabela de produtos
 	for (var id in myItens) {
-		var tableLine = "<tr id='" + id + "'>" +
-			"<td class='editField' style='display: none'> <input id='dept' type='text' class='form-control' value='" + myItens[id].dept + "'></input> </td>" +
-			"<td class='editField' style='display: none'> <input id='name' type='text' class='form-control' value='" + myItens[id].name + "'></input> </td>" +
-			"<td class='editField' style='display: none'> <input id='size' type='text' class='form-control' value='" + myItens[id].size + "'></input> </td>" +
-			"<td class='editField' style='display: none'> <input id='qtd' type='number' class='form-control' value='" + myItens[id].qtd + "'></input> </td>" +
-			"<td class='editField' style='display: none'> <input id='value' type='number' class='form-control' value='" + myItens[id].value + "' step='0.01'></input> </td>" +
+		var tableLine = "<tr class='' id='" + id + "'>" +
 			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].dept + "</p> </td>" +
 			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].name + "</p> </td>" +
 			"<td class='viewField centerClass'> <p id='' type='text'>" + myItens[id].size + "</p> </td>" +
 			"<td class='viewField centerClass'> <p id='' type='number'>" + myItens[id].qtd + "</p> </td>" +
 			"<td class='viewField centerClass'> <p id='' type='number' step='0.01'>" + myItens[id].value + "</p> </td>" +
-			"<td class='inline'>" +
-			"<span onclick=\"actUpdate('" + id + "');\" class='glyphicon glyphicon glyphicon-edit maintBtn '><p class='fontSize10px'> Editar</p></span>" +
-			// "<p> / </p>" +
-			"<span onclick=\"actDelete('" + id + "');\" class='glyphicon glyphicon-remove-circle maintBtn '><p class='fontSize10px'> Deletar</p></span> </td>" +
+			"<td class='editField'> <input id='dept' type='text' class='form-control' value='" + myItens[id].dept + "'></input> </td>" +
+			"<td class='editField'> <input id='name' type='text' class='form-control' value='" + myItens[id].name + "'></input> </td>" +
+			"<td class='editField'> <input id='size' type='text' class='form-control' value='" + myItens[id].size + "'></input> </td>" +
+			"<td class='editField'> <input id='qtd' type='number' class='form-control' value='" + myItens[id].qtd + "'></input> </td>" +
+			"<td class='editField'> <input id='value' type='number' class='form-control' value='" + myItens[id].value + "' step='0.01'></input> </td>" +
+			"<td class='centerClass'>" + "<span onclick=\"actUpdate('" + id + "');\" class='glyphicon glyphicon glyphicon-edit maintBtn'><p class='fontSize10px'>Editar</p></span> </td>" +
+			"<td class='centerClass'>" + "<span onclick=\"actDelete('" + id + "');\" class='glyphicon glyphicon-remove-circle maintBtn'><p class='fontSize10px'>Deletar</p></span> </td>" +
 			"</tr>";
 
 		code += tableLine;
@@ -345,4 +344,5 @@ deleteItem = function(itemId) {
 $(document).ready(function() {
 	// Initialize Firebase
 	firebase.initializeApp(firebaseConfig);
+	// initMaintScreen();
 }); // end-$(document).ready
